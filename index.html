@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myBucket - Your Personalized List</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="./bucket-white.png">
+    <meta name="description" content="myBucket - Your Personalized List">
+</head>
+
+<body>
+    <header class="top-nav">
+        <a href="index.html">
+            <div class="logo">
+                <img src="bucket-white.png" alt="myBucket Logo" class="logo-icon">
+                <span class="logo-text">myBucket</span>
+            </div>
+        </a>
+        <div class="theme">
+            <div class="theme-color"></div>
+            <div class="theme-icon" onclick="showTheme()">
+                <img src="down-white.png" alt="Theme Icon" class="theme-icon">
+            </div>
+        </div>
+    </header>
+
+    <div class="hr"></div>
+
+    <main class="main-text">
+        <p>Your <strong>Personalized</strong> Bucket List</p>
+    </main>
+
+    <section class="input-main-area">
+        <input class="inputTasks" type="text" placeholder="Enter a new task..." aria-label="New Task Input">
+        <img src="add-white.png" alt="Add Task Icon" class="input-icon">
+    </section>
+
+    <h2 class="main-text">My Tasks</h2>
+
+    <section class="list-main-area">
+        <ul id="task-list">
+            <li class="list-contents">Welcome, start a new journey!<div class="cross-icon"></div>
+            </li>
+        </ul>
+    </section>
+
+    <button class="clear" onclick="clearTaskList()">Clear All</button>
+
+    <footer class="bottom-nav">
+        <p>© myBucket 2024</p>
+    </footer>
+
+    <div class="theme-back" onclick="hideTheme()">
+        <div class="theme-menu">
+            <div class="theme-tokens-white" onclick="brightTheme()"></div>
+            <div class="theme-tokens-black" onclick="darkTheme()"></div>
+            <div class="theme-tokens-yellow" onclick="yellowTheme()"></div>
+        </div>
+    </div>
+
+    <button class="done-btn" onclick="hideTheme()">
+        <img src="cross-white.png" alt="Close Theme Menu" class="cross-icon">
+    </button>
+
+    <!-- Load scripts at the end for better performance -->
+    <script src="script.js" defer></script>
+
+</body>
+
+</html>
