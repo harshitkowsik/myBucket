@@ -221,6 +221,10 @@ ul {
     width: 70px;
 }
 
+.clear:active{
+    transform: scale(90%);
+}
+
 .theme-menu {
     top: 30%;
     left: 25%;
