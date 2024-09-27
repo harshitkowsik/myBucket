@@ -118,3 +118,76 @@ function yellowTheme() {
 
     logoIcon.src = 'bucket.png'; // Change logo icon image source for bright theme    
 }
+
+
+// Function to save tasks to local storage (by https://www.perplexity.ai/)
+function saveTasks() {
+    const tasks = [];
+    document.querySelectorAll('.list-contents').forEach(task => {
+        tasks.push(task.innerHTML); // Store inner HTML of each task
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks)); // Save tasks as a JSON string
+}
+
+// Function to load tasks from local storage
+function loadTasks() {
+    const savedTasks = JSON.parse(localStorage.getItem('tasks')) || []; // Retrieve tasks
+    savedTasks.forEach(taskHTML => {
+        const li = document.createElement('li'); // Create a new list item
+        li.className = 'list-contents'; // Assign class name for styling
+        li.innerHTML = taskHTML; // Set inner HTML with saved task
+        document.getElementById('task-list').appendChild(li); // Append to task list
+    });
+}
+
+// Call loadTasks on page load
+window.onload = loadTasks;
+
+// Add click event listener to the input icon for adding tasks
+document.querySelector('.input-icon').addEventListener('click', function () {
+    const inputField = document.querySelector('.inputTasks'); // Select the input field for tasks
+    const taskText = inputField.value.trim(); // Get the trimmed value from the input field
+
+    // Check if the input field is not empty
+    if (taskText) {
+        const li = document.createElement('li'); // Create a new list item
+        li.className = 'list-contents'; // Assign class name for styling
+        li.innerHTML = `${taskText} <div class="cross-icon"></div>`; // Set inner HTML with task text and a cross icon
+
+        document.getElementById('task-list').appendChild(li); // Append the new list item to the task list
+
+        // Clear the input field after adding the task
+        inputField.value = '';
+
+        // Save tasks after adding a new one
+        saveTasks();
+    }
+});
+
+// Event delegation for removing tasks when clicking on the cross icon
+document.getElementById('task-list').addEventListener('click', function (e) {
+    if (e.target.classList.contains('cross-icon')) { // Check if the clicked element is a cross icon
+        e.target.parentElement.remove(); // Remove the parent list item of the clicked cross icon
+        
+        // Save tasks after removing one
+        saveTasks();
+    }
+});
+
+// Function to clear all tasks from the task list
+function clearTaskList() {
+    const taskList = document.getElementById('task-list'); // Select the task list element
+    taskList.innerHTML = ''; // Clear all contents in the task list
+    
+    // Save an empty array to local storage after clearing all tasks
+    localStorage.setItem('tasks', JSON.stringify([]));
+}
+
+// Add keypress event listener to trigger task addition with Enter key
+document.querySelector('.inputTasks').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') { // Check if the pressed key is Enter
+        document.querySelector('.input-icon').click(); // Trigger click event on input icon to add task
+    }
+});
+
+// The rest of your theme functions remain unchanged...
